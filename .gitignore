@@ -1,0 +1,49 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/out/**
+
+<<<<<<< HEAD
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+=======
+.idea/
+*.iml
+
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+>>>>>>> 673253aa6e3b762b5f00894761e90ba8e0bdf6b0
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+/out/
