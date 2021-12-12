@@ -25,4 +25,10 @@ public class CategoriaController {
 		
 		return lista;
 	}
+	
+	@GetMapping("/teste")
+	public String mostrar() {
+		return "Casa";
+	}
+	
 }
