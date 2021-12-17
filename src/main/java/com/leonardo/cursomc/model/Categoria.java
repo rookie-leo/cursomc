@@ -10,18 +10,18 @@ public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String nome;
 	
 	public Categoria() {}
 
-	public Categoria(Integer id, String nome) {
+	public Categoria(Long id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
