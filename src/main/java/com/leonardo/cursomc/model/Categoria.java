@@ -1,9 +1,14 @@
 package com.leonardo.cursomc.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Categoria {
@@ -11,11 +16,14 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
+	private @NotBlank String nome;
+	@ManyToMany(mappedBy = "categorias")
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	@Deprecated
 	public Categoria() {}
 
-	public Categoria(Long id, String nome) {
+	public Categoria(Long id, @NotBlank String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
