@@ -27,7 +27,7 @@ public class CategoriaController {
 			return ResponseEntity.ok().body(categoria.get());
 		}
 
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.status(404).build();
 	}
 
 }

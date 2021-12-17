@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Categoria {
 
@@ -17,16 +19,18 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank String nome;
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	@Deprecated
 	public Categoria() {}
 
-	public Categoria(Long id, @NotBlank String nome) {
+	public Categoria(Long id, @NotBlank String nome, List<Produto> produtos) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.produtos.addAll(produtos);
 	}
 
 	public Long getId() {
@@ -64,8 +68,15 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + "]";
+		return "Categoria [id=" + id + ", nome=" + nome + ", produtos=" + produtos + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Categoria [id=" + id + ", nome=" + nome + "]";
+//	}
+	
+	
 	
 	
 	
