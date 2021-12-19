@@ -2,16 +2,23 @@ package com.leonardo.cursomc.model;
 
 import com.leonardo.cursomc.model.enuns.TipoCliente;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class Cliente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String documento;
     private Integer tipo;
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> endereco = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
 
     public Cliente() {}
