@@ -1,5 +1,6 @@
 package com.leonardo.cursomc.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.leonardo.cursomc.model.enuns.TipoCliente;
 
 import javax.persistence.*;
@@ -15,12 +16,14 @@ public class Cliente {
     private String email;
     private String documento;
     private Integer tipo;
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> endereco = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
 
+    @Deprecated
     public Cliente() {}
 
     public Cliente(Long id, String nome, String email, String documento, TipoCliente tipo) {
