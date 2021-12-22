@@ -6,6 +6,11 @@ Para isso, será implementada uma API Rest usando Java com Spring Boot e banco d
 ## *FRONT END*
 O front end será desenvolvido utilizando Ionic, com a arquitetura MVC do Angular, os componentes visuais do Ionic, Angular reactive forms, navegação, interceptors, local storage, paginação com infinite scroll, loading e refresher.<br>
 Versão: Ionic 3 e Angular 5
+<br>
+## *Anotações*
+° Durante a população do banco de dados H2 no arquivo data.sql, é visto a partir da linha 58, que precisei inserir dados na tabela pagamento antes de inserir dados nas tabelas pagamento_com_cartao e pagamento_com_boleto. Antes de fazer isso estava recebendo <b>JdbcSQLIntegrityConstraintViolationException</b>.<br>
+Link do commit: https://github.com/rookie-leo/cursomc/commit/cbf830df98b09c975c65f2812746acfb2f3955b7
+
 <br><br>
 Link do curso na Udemy: https://www.udemy.com/course/spring-boot-ionic/
 <br>
