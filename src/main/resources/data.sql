@@ -48,6 +48,19 @@ insert into endereco(logradouro, numero, complemento, bairro, cep, cliente_id, c
     values('av Brasil', '1565', 'Predio B', 'Irajá', '21230-280', 3, 3);
 insert into endereco(logradouro, numero, complemento, bairro, cep, cliente_id, cidade_id)
     values('Avenida Francisco Glicério', '10', 'B', 'Guanabara', '13012-000', 4, 4);
+    
+-- Pedido
+insert into pedido(instante, cliente_id, endereco_de_entrega_id) values('2007-12-03T10:15:30', 1, 1);
+insert into pedido(instante, cliente_id, endereco_de_entrega_id) values('2015-01-03T23:49:30', 2, 2);
+insert into pedido(instante, cliente_id, endereco_de_entrega_id) values('2021-12-04T05:19:30', 3, 3);
+
+
+-- Pagamento_com_Cartao
+insert into pagamento(estado, pedido_id) values(2, 1);
+insert into pagamento_com_cartao(numero_parcelas, pedido_id) values((6), select id from pedido where id = 1);
+insert into pagamento(estado, pedido_id) values(1, 2);
+insert into pagamento_com_boleto(data_vencimento, data_pagamento, pedido_id) values('2007-12-03T10:15:30', '2007-12-03T10:15:30', 2);
+
 
 -- Consultas
 --SELECT * FROM ESTADO ;

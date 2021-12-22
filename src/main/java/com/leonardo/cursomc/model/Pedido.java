@@ -2,20 +2,45 @@ package com.leonardo.cursomc.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Pedido {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDateTime instatne =  LocalDateTime.now();
+	private LocalDateTime instante =  LocalDateTime.now();
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	@ManyToOne
+	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco enderecoEntrega;
 	
 	public Pedido() {}
 
-	public Pedido(Long id, LocalDateTime instatne, Pagamento pagamento, Cliente cliente, Endereco enderecoEntrega) {
+	public Pedido(Long id, LocalDateTime instante, Cliente cliente, Endereco enderecoEntrega) {
 		super();
 		this.id = id;
-		this.instatne = instatne;
+		this.instante = instante;
+		this.cliente = cliente;
+		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public Pedido(Long id, LocalDateTime instante, Pagamento pagamento, Cliente cliente, Endereco enderecoEntrega) {
+		super();
+		this.id = id;
+		this.instante = instante;
 		this.pagamento = pagamento;
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
@@ -27,8 +52,8 @@ public class Pedido {
 		return id;
 	}
 
-	public LocalDateTime getInstatne() {
-		return instatne;
+	public LocalDateTime getInstante() {
+		return instante;
 	}
 
 	public Pagamento getPagamento() {
@@ -50,7 +75,7 @@ public class Pedido {
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((enderecoEntrega == null) ? 0 : enderecoEntrega.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((instatne == null) ? 0 : instatne.hashCode());
+		result = prime * result + ((instante == null) ? 0 : instante.hashCode());
 		result = prime * result + ((pagamento == null) ? 0 : pagamento.hashCode());
 		return result;
 	}
@@ -79,10 +104,10 @@ public class Pedido {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (instatne == null) {
-			if (other.instatne != null)
+		if (instante == null) {
+			if (other.instante != null)
 				return false;
-		} else if (!instatne.equals(other.instatne))
+		} else if (!instante.equals(other.instante))
 			return false;
 		if (pagamento == null) {
 			if (other.pagamento != null)

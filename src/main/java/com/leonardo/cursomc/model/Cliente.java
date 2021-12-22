@@ -22,6 +22,7 @@ public class Cliente {
     @ElementCollection
     @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
+    @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
     @Deprecated

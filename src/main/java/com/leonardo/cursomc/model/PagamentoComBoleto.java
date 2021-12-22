@@ -2,8 +2,11 @@ package com.leonardo.cursomc.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.leonardo.cursomc.model.enuns.EstadoPagamento;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 	
 	private Date dataVencimento;

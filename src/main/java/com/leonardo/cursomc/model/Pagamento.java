@@ -1,19 +1,33 @@
 package com.leonardo.cursomc.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
 import com.leonardo.cursomc.model.enuns.EstadoPagamento;
 
-public class Pagamento {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pagamento {
 
+	@Id
 	private Long id;
-	private EstadoPagamento estado;
+	private Integer estado;
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	@MapsId
 	private Pedido pedido;
-	
+
 	public Pagamento() {}
 
 	public Pagamento(Long id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estado = estado;
+		this.estado = estado.getCod();
 		this.pedido = pedido;
 	}
 
@@ -22,7 +36,7 @@ public class Pagamento {
 	}
 
 	public EstadoPagamento getEstado() {
-		return estado;
+		return EstadoPagamento.toEnum(estado);
 	}
 
 	public Pedido getPedido() {

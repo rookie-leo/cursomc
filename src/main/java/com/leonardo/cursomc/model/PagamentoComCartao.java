@@ -1,7 +1,10 @@
 package com.leonardo.cursomc.model;
 
+import javax.persistence.Entity;
+
 import com.leonardo.cursomc.model.enuns.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento{
 
 	private Integer numeroParcelas;
