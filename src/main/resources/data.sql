@@ -61,6 +61,17 @@ insert into pagamento_com_cartao(numero_parcelas, pedido_id) values((6), select 
 insert into pagamento(estado, pedido_id) values(1, 2);
 insert into pagamento_com_boleto(data_vencimento, data_pagamento, pedido_id) values('2007-12-03T10:15:30', '2007-12-03T10:15:30', 2);
 
+-- Item_Pedido
+insert into item_pedido(desconto, preco, quantidade, pedido_id, produto_id) values(35.0, (
+	select preco from produto where id = 1),
+2, 1, 1);
+insert into item_pedido(desconto, preco, quantidade, pedido_id, produto_id) values(10.0, (
+	select preco from produto where id = 2),
+5, 2, 2);
+insert into item_pedido(desconto, preco, quantidade, pedido_id, produto_id) values(10.0, (
+	select preco from produto where id = 3),
+10, 3, 3);
+
 
 -- Consultas
 --SELECT * FROM ESTADO ;
