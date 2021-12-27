@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Categoria {
 
@@ -19,7 +17,6 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank String nome;
-	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
@@ -71,13 +68,4 @@ public class Categoria {
 		return "Categoria [id=" + id + ", nome=" + nome + ", produtos=" + produtos + "]";
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Categoria [id=" + id + ", nome=" + nome + "]";
-//	}
-	
-	
-	
-	
-	
 }

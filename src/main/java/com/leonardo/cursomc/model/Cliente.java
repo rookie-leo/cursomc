@@ -1,11 +1,20 @@
 package com.leonardo.cursomc.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.leonardo.cursomc.model.enuns.TipoCliente;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.leonardo.cursomc.model.enuns.TipoCliente;
 
 @Entity
 public class Cliente {
@@ -17,13 +26,12 @@ public class Cliente {
     private String email;
     private String documento;
     private Integer tipo;
-    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> endereco = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "TELEFONES")
     private Set<String> telefones = new HashSet<>();
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 

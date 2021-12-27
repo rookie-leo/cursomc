@@ -8,8 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Cidade {
 
@@ -17,7 +15,6 @@ public class Cidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank String nome;
-	@JsonManagedReference
 	private @ManyToOne @Valid Estado estado;
 	
 	public Cidade() {}

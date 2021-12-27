@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Estado {
@@ -19,7 +19,7 @@ public class Estado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank String nome;
-	@JsonBackReference
+	@JsonIgnore
 	private @OneToMany List<Cidade>cidade = new ArrayList<Cidade>();
 	
 	@Deprecated
@@ -84,7 +84,5 @@ public class Estado {
 	public String toString() {
 		return "Estado [id=" + id + ", nome=" + nome + ", cidade=" + cidade + "]";
 	}
-	
-	
 	
 }

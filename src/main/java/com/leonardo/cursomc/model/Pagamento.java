@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.leonardo.cursomc.model.enuns.EstadoPagamento;
 
 @Entity
@@ -18,7 +18,7 @@ public abstract class Pagamento {
 	@Id
 	private Long id;
 	private Integer estado;
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId

@@ -3,9 +3,7 @@ package com.leonardo.cursomc.model;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class ItemPedido {
@@ -33,7 +31,7 @@ public class ItemPedido {
 		return id.getPedido();
 	}
 	
-	@JsonBackReference
+	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
 	}
