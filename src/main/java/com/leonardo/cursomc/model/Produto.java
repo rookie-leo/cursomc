@@ -17,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Produto {
@@ -26,12 +28,15 @@ public class Produto {
 	private Long id;
 	private @NotBlank String nome;
 	private @NotNull Double preco;
+	
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 				joinColumns = @JoinColumn(name = "produto_id"),
 				inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<Categoria>();
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
@@ -67,6 +72,7 @@ public class Produto {
 		return itens;
 	}
 	
+	@JsonIgnore
 	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>(); 
 		for (ItemPedido pedido : itens) {
@@ -124,8 +130,5 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }

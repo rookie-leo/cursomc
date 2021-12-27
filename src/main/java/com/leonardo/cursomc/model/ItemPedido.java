@@ -3,9 +3,14 @@ package com.leonardo.cursomc.model;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class ItemPedido {
 
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -23,10 +28,12 @@ public class ItemPedido {
 		this.preco = preco;
 	}
 
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
 	
+	@JsonBackReference
 	public Produto getProduto() {
 		return id.getProduto();
 	}
@@ -41,6 +48,12 @@ public class ItemPedido {
 
 	public Double getPreco() {
 		return preco;
+	}
+	
+	
+
+	public void setId(ItemPedidoPK id) {
+		this.id = id;
 	}
 
 	@Override
