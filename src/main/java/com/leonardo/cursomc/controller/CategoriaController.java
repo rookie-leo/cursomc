@@ -3,11 +3,14 @@ package com.leonardo.cursomc.controller;
 import java.net.URI;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,16 +36,29 @@ public class CategoriaController {
 
 		return ResponseEntity.status(404).build();
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
 		repository.save(categoria);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(categoria.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId())
 				.toUri();
-		
+
 		return ResponseEntity.created(uri).build();
+	}
+
+	@Transactional
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> update(@RequestBody Categoria request, @PathVariable Long id) {
+		Optional<Categoria> categoria = repository.findById(id);
+
+		if (categoria.isPresent()) {
+			Categoria novoNome = categoria.get();
+			novoNome.setNome(request.getNome());
+			repository.save(novoNome);
+			return ResponseEntity.noContent().build();
+		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 }

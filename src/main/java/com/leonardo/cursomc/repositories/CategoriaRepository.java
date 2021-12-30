@@ -7,5 +7,5 @@ import com.leonardo.cursomc.model.Categoria;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
-
+	
 }
