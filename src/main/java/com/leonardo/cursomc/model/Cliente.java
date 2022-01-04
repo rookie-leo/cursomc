@@ -43,7 +43,7 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.documento = documento;
-        this.tipo = tipo.getCod();
+        this.tipo = (tipo == null) ? null : tipo.getCod();
     }
 
     public Long getId() {
@@ -77,6 +77,14 @@ public class Cliente {
     public List<Pedido> getPedidos() {
 		return pedidos;
 	}
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
+    
+    public void setEmail(String email) {
+    	this.email = email;
+    }
 
 	@Override
 	public int hashCode() {
