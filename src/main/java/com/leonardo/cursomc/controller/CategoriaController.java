@@ -4,9 +4,12 @@ import java.net.URI;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.leonardo.cursomc.config.exceptions.DataIntegrityException;
 import com.leonardo.cursomc.model.Categoria;
 import com.leonardo.cursomc.repositories.CategoriaRepository;
 
@@ -59,6 +63,18 @@ public class CategoriaController {
 		}
 
 		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		try {
+			repository.deleteById(id);
+						
+		} catch (DataIntegrityViolationException | ConstraintViolationException ex) {
+			throw new DataIntegrityException("Não é possível excluir essa categoria!");
+		}
+		return ResponseEntity.noContent().build();
+		
 	}
 
 }
