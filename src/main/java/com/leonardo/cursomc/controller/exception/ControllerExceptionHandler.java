@@ -2,13 +2,13 @@ package com.leonardo.cursomc.controller.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.leonardo.cursomc.config.exceptions.DataIntegrityException;
+import com.leonardo.cursomc.config.exceptions.ObjectNotFoundException;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
