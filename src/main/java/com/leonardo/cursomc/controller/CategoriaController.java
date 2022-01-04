@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -52,7 +53,8 @@ public class CategoriaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO request) {
+		Categoria categoria = request.toModel();
 		repository.save(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId())
 				.toUri();
@@ -74,67 +76,39 @@ public class CategoriaController {
 
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		try {
 			repository.deleteById(id);
-						
+
 		} catch (DataIntegrityViolationException | ConstraintViolationException ex) {
 			throw new DataIntegrityException("Não é possível excluir essa categoria!");
 		} catch (EmptyResultDataAccessException ex) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
 		}
+
 		return ResponseEntity.noContent().build();
-		
 	}
-	
+
 	@GetMapping
 	public List<CategoriaDTO> findAll() {
 		List<Categoria> lista = repository.findAll();
 		List<CategoriaDTO> categorias = lista.stream().map(cat -> new CategoriaDTO(cat)).collect(Collectors.toList());
-				
+
 		return categorias;
 	}
-	
+
 	@GetMapping("/page")
-	public ResponseEntity<Page<CategoriaDTO>> findPage(
-			@RequestParam(value="page", defaultValue="0") Integer page,
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		PageRequest request = PageRequest.of(page,  linesPerPage, Direction.valueOf(direction), orderBy);
+	public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+		PageRequest request = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Categoria> categorias = repository.findAll(request);
 		Page<CategoriaDTO> categoriasDTO = categorias.map(dto -> new CategoriaDTO(dto));
+
 		return ResponseEntity.ok().body(categoriasDTO);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

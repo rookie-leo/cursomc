@@ -1,11 +1,16 @@
 package com.leonardo.cursomc.controller.dto;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.leonardo.cursomc.model.Categoria;
+import com.sun.istack.NotNull;
 
 public class CategoriaDTO {
 
-	private Long id;
-	private String nome;
+	private @NotNull Long id;
+	private @NotBlank @Length(min=1, max=80) String nome;
 		
 	public CategoriaDTO() {
 	}
@@ -22,6 +27,10 @@ public class CategoriaDTO {
 
 	public String getNome() {
 		return nome;
+	}
+	
+	public Categoria toModel() {
+		return new Categoria(this.id, this.nome);
 	}
 	
 }

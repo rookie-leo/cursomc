@@ -19,9 +19,16 @@ public class Categoria {
 	private @NotBlank String nome;
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<Produto>();
-	
+
 	@Deprecated
-	public Categoria() {}
+	public Categoria() {
+	}
+
+	public Categoria(Long id, @NotBlank String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
 
 	public Categoria(Long id, @NotBlank String nome, List<Produto> produtos) {
 		super();
@@ -37,7 +44,7 @@ public class Categoria {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
