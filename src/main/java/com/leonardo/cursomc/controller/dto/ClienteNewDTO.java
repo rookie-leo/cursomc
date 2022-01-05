@@ -1,24 +1,52 @@
 package com.leonardo.cursomc.controller.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.leonardo.cursomc.model.Cidade;
 import com.leonardo.cursomc.model.Cliente;
 import com.leonardo.cursomc.model.Endereco;
 import com.leonardo.cursomc.model.enuns.TipoCliente;
+import com.leonardo.cursomc.service.validation.ClienteInsert;
 
+@ClienteInsert
 public class ClienteNewDTO {
 
+	@NotBlank @Length(min=1, max=80) 
 	private String nome;
+	
+	@NotBlank @Length(min=1, max=80) @Email
 	private String email;
+	
+	@NotBlank
 	private String documento;
+	
+	@NotNull
 	private Integer tipo;
+	
+	@NotBlank
 	private String logradouro;
+	
+	@NotBlank
 	private String numero;
+	
 	private String complemento;
+	
+	@NotBlank
 	private String bairro;
+	
+	@NotBlank
 	private String cep;
+	
+	@NotBlank
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
+	
+	@NotNull
 	private Long cidadeId;
 	
 	public ClienteNewDTO() {}
