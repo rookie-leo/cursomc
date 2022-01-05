@@ -35,9 +35,8 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
-    @Deprecated
     public Cliente() {}
-
+    
     public Cliente(Long id, String nome, String email, String documento, TipoCliente tipo) {
         this.id = id;
         this.nome = nome;
