@@ -6,13 +6,20 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.leonardo.cursomc.controller.dto.ClienteNewDTO;
 import com.leonardo.cursomc.controller.exception.FieldMessage;
+import com.leonardo.cursomc.model.Cliente;
 import com.leonardo.cursomc.model.enuns.TipoCliente;
+import com.leonardo.cursomc.repositories.ClienteRepository;
 import com.leonardo.cursomc.service.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
+	@Autowired
+	private ClienteRepository repository;
+	
 	@Override
 	public void initialize(ClienteInsert constraintAnnotation) {
 	}
@@ -28,6 +35,12 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 
 		if (dto.getTipo().equals(TipoCliente.PESSOA_JURIDICA.getCod()) && !BR.isValidCNPJ(dto.getDocumento())) {
 			list.add(new FieldMessage("documento", "Documento inválido!"));
+		}
+		
+		Cliente cliente = repository.findByEmail(dto.getEmail());
+		
+		if (cliente != null) {
+			list.add(new FieldMessage("email", "Email já cadastrado!"));
 		}
 
 		for (FieldMessage msg : list) {
