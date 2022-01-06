@@ -6,7 +6,9 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 import com.leonardo.cursomc.model.Cliente;
+import com.leonardo.cursomc.service.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO {
 
 	private Long id;

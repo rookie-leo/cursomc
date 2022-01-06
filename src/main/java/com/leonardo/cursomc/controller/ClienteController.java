@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
@@ -65,7 +64,7 @@ public class ClienteController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@Transactional
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody ClienteDTO request, @PathVariable Long id) {
 		Optional<Cliente> cliente = repository.findById(id);
