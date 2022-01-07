@@ -77,6 +77,15 @@ public class Pedido {
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
+	
+	public Double getValorTotal() {
+		Double soma = 0.0;
+		for (ItemPedido item : itens) {
+			soma += item.getSubtotal();
+		}
+		
+		return soma;
+	}
 
 	@Override
 	public int hashCode() {

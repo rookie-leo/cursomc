@@ -25,6 +25,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
 
 	@JsonIgnore
 	public Pedido getPedido() {
@@ -34,6 +35,10 @@ public class ItemPedido {
 	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
+	}
+
+	public Double getSubtotal() {
+		return (preco - desconto) * quantidade;
 	}
 
 	public Double getDesconto() {

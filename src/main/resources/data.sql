@@ -85,8 +85,3 @@ insert into item_pedido(desconto, preco, quantidade, pedido_id, produto_id) valu
 insert into item_pedido(desconto, preco, quantidade, pedido_id, produto_id) values(10.0, (
 	select preco from produto where id = 3),
 10, 3, 3);
-
-
--- Consultas
---SELECT * FROM ESTADO ;
---SELECT * FROM CIDADE ;
