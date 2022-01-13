@@ -1,4 +1,4 @@
-package com.leonardo.cursomc.service.validation;
+package com.leonardo.cursomc.services.validation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.leonardo.cursomc.controller.exception.FieldMessage;
 import com.leonardo.cursomc.model.Cliente;
 import com.leonardo.cursomc.model.enuns.TipoCliente;
 import com.leonardo.cursomc.repositories.ClienteRepository;
-import com.leonardo.cursomc.service.validation.utils.BR;
+import com.leonardo.cursomc.services.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
