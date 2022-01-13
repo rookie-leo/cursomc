@@ -53,10 +53,28 @@ public class ItemPedido {
 		return preco;
 	}
 	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
 	
+	public void setProduto(Produto produto ) {
+		id.setProduto(produto);
+	}
 
 	public void setId(ItemPedidoPK id) {
 		this.id = id;
+	}
+	
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	@Override

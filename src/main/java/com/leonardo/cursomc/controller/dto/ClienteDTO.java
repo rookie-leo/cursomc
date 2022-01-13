@@ -15,6 +15,7 @@ public class ClienteDTO {
 	private @NotBlank @Length(min=1, max=80) String nome;
 	private @NotBlank @Length(min=1, max=80) @Email String email;
 	
+	@Deprecated
 	public ClienteDTO() {}
 
 	public ClienteDTO(Cliente cliente) {

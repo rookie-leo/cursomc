@@ -2,9 +2,11 @@ package com.leonardo.cursomc.model;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.leonardo.cursomc.model.enuns.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento{
 
 	private Integer numeroParcelas;

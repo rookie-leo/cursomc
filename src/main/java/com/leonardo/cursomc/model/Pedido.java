@@ -20,8 +20,8 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDateTime instante =  LocalDateTime.now();
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	private LocalDateTime instante =  LocalDateTime.now();  
+	@OneToOne(optional = true, cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -35,25 +35,18 @@ public class Pedido {
 	@Deprecated
 	public Pedido() {}
 
-	public Pedido(Long id, LocalDateTime instante, Cliente cliente, Endereco enderecoEntrega) {
-		super();
+	public Pedido(Long id, Cliente cliente, Endereco enderecoEntrega) {
 		this.id = id;
-		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
-	public Pedido(Long id, LocalDateTime instante, Pagamento pagamento, Cliente cliente, Endereco enderecoEntrega) {
-		super();
-		this.id = id;
-		this.instante = instante;
+	public Pedido(Pagamento pagamento, Cliente cliente, Endereco enderecoEntrega) {
 		this.pagamento = pagamento;
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
 	}
 	
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -77,7 +70,15 @@ public class Pedido {
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
-	
+		
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
 	public Double getValorTotal() {
 		Double soma = 0.0;
 		for (ItemPedido item : itens) {
