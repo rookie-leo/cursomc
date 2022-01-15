@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import com.leonardo.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,59 +35,18 @@ import com.leonardo.cursomc.repositories.ProdutoRepository;
 public class PedidoController {
 
 	@Autowired
-	private PedidoRepository repository;
-	
-	@Autowired
-	private PagamentoRepository pgtoRepository;
-	
-	@Autowired
-	private ProdutoRepository prodRepository;
-	
-	@Autowired
-	private ItemPedidoRepository itemRepository;
-	
-	@Autowired
-	private ClienteRepository clienteRepository;
-	
-	@Autowired
-	private EnderecoRepository endRepository;
+	private PedidoService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Pedido> buscar(@PathVariable("id") Long id) {
-		Optional<Pedido> pedido = repository.findById(id);
-
-		if (pedido.isPresent()) {
-			return ResponseEntity.ok().body(pedido.get());
-		}
+	public ResponseEntity<Pedido> find(@PathVariable("id") Long id) {
+		Pedido pedido = service.find(id);
 
 		return ResponseEntity.status(404).build();
 	}
 
-	@Transactional
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody PedidoForm form) {
-		Cliente cliente = clienteRepository.findById(form.getClienteId()).get();
-		Endereco endereco = endRepository.findById(form.getEnderecoEntregaId()).get();
-		
-		Pedido pedido = form.toModel(cliente, endereco, form.getPagamento());
-		
-		repository.save(pedido);
-		
-		if (pedido.getPagamento() instanceof PagamentoComBoleto) {
-			PagamentoComBoleto pgto = (PagamentoComBoleto) pedido.getPagamento(); 
-			PagamentoComBoleto.preencherPagamentoComBoleto(pgto, pedido.getInstante());
-		}
-		
-		pgtoRepository.save(pedido.getPagamento());// está nulo
-		
-		for (ItemPedido item : pedido.getItens()) {
-			item.setDesconto(0.0);
-			item.setProduto(prodRepository.findById(item.getProduto().getId()).get());
-			item.setPreco(item.getProduto().getPreco());
-			item.setPedido(pedido);
-		}
-		
-		itemRepository.saveAll(pedido.getItens());
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
+		pedido = service.insert(pedido);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("{id}")
 				.buildAndExpand(pedido.getId())

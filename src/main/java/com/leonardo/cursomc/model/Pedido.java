@@ -79,6 +79,10 @@ public class Pedido {
 		this.pagamento = pagamento;
 	}
 
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Double getValorTotal() {
 		Double soma = 0.0;
 		for (ItemPedido item : itens) {
