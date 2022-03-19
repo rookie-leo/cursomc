@@ -10,7 +10,7 @@ import com.leonardo.cursomc.model.Cidade;
 import com.leonardo.cursomc.model.Cliente;
 import com.leonardo.cursomc.model.Endereco;
 import com.leonardo.cursomc.model.enuns.TipoCliente;
-import com.leonardo.cursomc.service.validation.ClienteInsert;
+import com.leonardo.cursomc.services.validation.ClienteInsert;
 
 @ClienteInsert
 public class ClienteNewDTO {

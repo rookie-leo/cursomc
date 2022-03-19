@@ -1,4 +1,4 @@
-package com.leonardo.cursomc.service.validation;
+package com.leonardo.cursomc.services.validation;
 
 import java.util.ArrayList;
 import java.util.List;
