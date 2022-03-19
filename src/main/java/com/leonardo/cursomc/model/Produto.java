@@ -80,6 +80,26 @@ public class Produto {
 		
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", categorias=" + categorias + "]";

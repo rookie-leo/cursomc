@@ -32,7 +32,6 @@ public class ItemPedido {
 		return id.getPedido();
 	}
 	
-	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
 	}
@@ -75,6 +74,10 @@ public class ItemPedido {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	public ItemPedidoPK getId() {
+		return id;
 	}
 
 	@Override
