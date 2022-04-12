@@ -1,7 +1,9 @@
 package com.leonardo.cursomc.model;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -116,5 +118,30 @@ public class Pedido {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append("Número do pedido: ");
+		builder.append(getId());
+		builder.append(", Instante: ");
+		builder.append(getInstante());
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append(", Status pagamento: ");
+		builder.append(getPagamento().getEstado().getDescricao());
+		builder.append("\nDetalhes:\n");
 		
+		for (ItemPedido ip: getItens()) {
+			builder.append(ip.toString());
+		}
+		
+		builder.append("Valor total: ");
+		builder.append(currency.format(getValorTotal()));
+		return builder.toString();
+	}
+
+	
+	
 }

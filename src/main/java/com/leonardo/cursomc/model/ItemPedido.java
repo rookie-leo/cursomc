@@ -1,5 +1,8 @@
 package com.leonardo.cursomc.model;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -122,5 +125,20 @@ public class ItemPedido {
 			return false;
 		return true;
 	}
-		
+
+	@Override
+	public String toString() {
+		NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));//Formata o valor para moeda local especificada
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Quantidade: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário: ");
+		builder.append(currency.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(currency.format(getSubtotal()));
+		builder.append("\n");
+		return builder.toString();
+	}	
+	
 }

@@ -59,7 +59,7 @@ public class PedidoService {
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
-
+        System.out.println(pedido);
         return pedido;
     }
 
