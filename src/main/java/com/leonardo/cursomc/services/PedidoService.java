@@ -30,6 +30,9 @@ public class PedidoService {
 
     @Autowired
     private ProdutoService produtoService;
+    
+    @Autowired
+    private EmailService emailService;
 
     public Pedido find(Long id) {
         Optional<Pedido> pedido = repository.findById(id);
@@ -59,7 +62,7 @@ public class PedidoService {
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
-        System.out.println(pedido);
+        emailService.sendOrderConfirmationEmail(pedido);
         return pedido;
     }
 
